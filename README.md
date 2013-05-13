@@ -20,7 +20,7 @@ git submodule update --recursive --init
 sudo python ./web.py
 ```
 
-### nginx + uWSGI
+### Nginx + uWSGI
 ```
 #. ubuntu 12.04
 sudo apt-get install uwsgi uwsgi-plugin-python nginx 
@@ -29,12 +29,12 @@ git clone https://github.com/marlboromoo/web_mcstatus.git
 cd web_mcstatus 
 git submodule update --recursive --init
 #. uWSGI config
-\cp doc/uwsgi.xml /etc/uwsgi/apps-available/web_mcstatus.xml
-\ln -s  /etc/uwsgi/apps-available/web_mcstatus.xml /etc/uwsgi/apps-enabled/
+cp doc/uwsgi.xml /etc/uwsgi/apps-available/web_mcstatus.xml
+ln -s  /etc/uwsgi/apps-available/web_mcstatus.xml /etc/uwsgi/apps-enabled/
 /etc/init.d/uwsgi restart
 #. nginx config
-\cp doc/nginx.conf /etc/nginx/sites-available/web_mcstatus
-\ln -s /etc/nginx/sites-available/web_mcstatus /etc/nginx/sites-enabled/
+cp doc/nginx.conf /etc/nginx/sites-available/web_mcstatus
+ln -s /etc/nginx/sites-available/web_mcstatus /etc/nginx/sites-enabled/
 /etc/init.d/nginx restart
 ```
 
