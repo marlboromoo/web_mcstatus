@@ -17,6 +17,7 @@ cd /var/www/
 git clone https://github.com/marlboromoo/web_mcstatus.git
 cd web_mcstatus
 git submodule update --recursive --init
+sudo pip install bottle
 sudo python ./web.py
 ```
 
@@ -24,6 +25,7 @@ sudo python ./web.py
 ```
 #. ubuntu 12.04
 sudo apt-get install uwsgi uwsgi-plugin-python nginx 
+sudo pip install bottle
 cd /var/www/
 git clone https://github.com/marlboromoo/web_mcstatus.git
 cd web_mcstatus 
