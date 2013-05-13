@@ -4,8 +4,6 @@ from json import JSONEncoder
 from mcstatus.minecraft_query import MinecraftQuery
 from bottle import get, run, default_app
 
-query = MinecraftQuery("localhost", 25565)
-
 @get('/')
 def index():
     """docstring for index"""
@@ -14,11 +12,13 @@ def index():
 @get('')
 def status():
     """show status"""
+    query = MinecraftQuery("localhost", 25565)
     return JSONEncoder().encode(query.get_status())
 
 @get('/rules')
 def rules():
     """show full status"""
+    query = MinecraftQuery("localhost", 25565)
     return JSONEncoder().encode(query.get_rules())
 
 if __name__ == '__main__':
