@@ -13,19 +13,21 @@ WEB API to query Minecraft status.
 
 ### Build-in server
 ```
+sudo su -
 cd /var/www/
 git clone https://github.com/marlboromoo/web_mcstatus.git
 cd web_mcstatus
 git submodule update --recursive --init
-sudo pip install bottle
-sudo python ./web.py
+pip install bottle
+python ./web.py
 ```
 
 ### Nginx + uWSGI
 ```
 #. ubuntu 12.04
-sudo apt-get install uwsgi uwsgi-plugin-python nginx 
-sudo pip install bottle
+sudo su -
+apt-get install uwsgi uwsgi-plugin-python nginx 
+pip install bottle
 cd /var/www/
 git clone https://github.com/marlboromoo/web_mcstatus.git
 cd web_mcstatus 
