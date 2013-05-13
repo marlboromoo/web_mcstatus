@@ -53,7 +53,7 @@ Released under the [MIT License] [5].
                                                                                 
   [1]: https://github.com/Dinnerbone/mcstatus "mcstatus"
   [2]: http://bottlepy.org "Bottle"
-  [3]: http://curl.haxx.se/ "uWSGI"
+  [3]: http://projects.unbit.it/uwsgi/ "uWSGI"
   [4]: http://nginx.org/ "Nginx"
   [5]: http://opensource.org/licenses/MIT "MIT License"
 
