@@ -45,6 +45,11 @@ curl http://127.0.1.1/status
 curl http://127.0.1.1/rules #. full status
 ```
 
+### TODO
+ - Query multiple hosts
+ - Configuation system
+ - ...
+
 ## Author                                                                       
 Timothy.Lee a.k.a MarlboroMoo.                                                  
                                                                                 
