@@ -1,6 +1,6 @@
 # web_mcstatus
 
-WEB API to query Minecraft status.
+WEB API/Widget to query Minecraft status.
 
 ## Requirments 
  - Python
@@ -43,11 +43,14 @@ ln -s /etc/nginx/sites-available/web_mcstatus /etc/nginx/sites-enabled/
 ```
 
 ## Usage
+### API
 ```
 curl http://127.0.1.1/ 
 curl http://127.0.1.1/status 
 curl http://127.0.1.1/rules #. full status
 ```
+### WIDGET
+see [web_mcstatus.html] [5].
 
 ### TODO
  - Query multiple hosts
@@ -58,11 +61,12 @@ curl http://127.0.1.1/rules #. full status
 Timothy.Lee a.k.a MarlboroMoo.                                                  
                                                                                 
 ## License                                                                      
-Released under the [MIT License] [5].                                           
+Released under the [MIT License] [6].                                           
                                                                                 
   [1]: https://github.com/Dinnerbone/mcstatus "mcstatus"
   [2]: http://bottlepy.org "Bottle"
   [3]: http://projects.unbit.it/uwsgi/ "uWSGI"
   [4]: http://nginx.org/ "Nginx"
-  [5]: http://opensource.org/licenses/MIT "MIT License"
+  [5]: https://github.com/marlboromoo/web_mcstatus/blob/master/doc/web_mcstatus.html "web_mcstatus.html"
+  [6]: http://opensource.org/licenses/MIT "MIT License"
 

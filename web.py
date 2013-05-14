@@ -2,26 +2,68 @@
 
 from json import JSONEncoder
 from mcstatus.minecraft_query import MinecraftQuery
-from bottle import get, run, default_app
+from bottle import get, request, response, run, default_app
+import js
+
+MC_HOST="localhost"
+MC_PORT=25565
+BIND_HOST='127.0.1.1'
+BIND_PORT=80
+
 
 @get('/')
 def index():
     """docstring for index"""
     return JSONEncoder().encode({'methods' : ['status', 'rules']})
 
-@get('')
-def status():
+def mc_query(mqfun):
+    """Wrapper for MinecraftQuery - return json/jsonp data"""
+    #. create connection
+    q = request.query
+    host = q.get('host') if 'host' in q.keys() else MC_HOST
+    port = q.get('port') if 'port' in q.keys() else MC_PORT
+    try:
+        query = MinecraftQuery(host, int(port))
+    except Exception:
+        query = MinecraftQuery(host, MC_PORT)
+    #. get infos
+    fun = getattr(query, mqfun)
+    data = JSONEncoder().encode(fun())
+    #. return results
+    if request.query.get('callback'):
+        response.headers['Content-Type'] = 'text/javascript'
+        return "%s ( %s )" % (request.query.get('callback'), data)
+    else:
+        response.headers['Content-Type'] = 'application/json'
+        return data
+
+@get('/status')
+def return_status():
     """show status"""
-    query = MinecraftQuery("localhost", 25565)
-    return JSONEncoder().encode(query.get_status())
+    return mc_query('get_status')
 
 @get('/rules')
-def rules():
+def return_rules():
     """show full status"""
-    query = MinecraftQuery("localhost", 25565)
-    return JSONEncoder().encode(query.get_rules())
+    return mc_query('get_rules')
+
+@get('/web_mcstatus.js')
+def return_js():
+    """dynamic create java script file for widget use"""
+    q = request.query
+    scheme = request.urlparts.scheme
+    netloc = request.urlparts.netloc
+    host = q.get('host') if 'host' in q.keys() else MC_HOST
+    port = q.get('port') if 'port' in q.keys() else MC_PORT
+    response.headers['Content-Type'] = 'text/javascript'
+    return js.make_js(scheme, netloc, host, port)
+
+@get('/favicon.ico')
+def return_favicon():
+    """empty favicon.ico"""
+    return ""
 
 if __name__ == '__main__':
-    run(host='127.0.1.1', port=80, debug=True, reloader=True)
+    run(host=BIND_HOST, port=BIND_PORT, debug=True, reloader=True)
 else:
     application = default_app()
