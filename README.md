@@ -43,16 +43,18 @@ ln -s /etc/nginx/sites-available/web_mcstatus /etc/nginx/sites-enabled/
 ```
 
 ## Usage
+
 ### API
 ```
 curl http://127.0.1.1/ 
 curl http://127.0.1.1/status 
 curl http://127.0.1.1/rules #. full status
 ```
+
 ### WIDGET
 see [web_mcstatus.html] [5].
 
-### TODO
+## TODO
  - Query multiple hosts
  - Configuation system
  - ...
