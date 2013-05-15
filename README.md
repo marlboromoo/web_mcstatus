@@ -19,7 +19,7 @@ cd /var/www/
 git clone https://github.com/marlboromoo/web_mcstatus.git
 cd web_mcstatus
 git submodule update --recursive --init
-pip install bottle
+pip install bottle slimit
 python ./web.py
 ```
 
@@ -28,7 +28,7 @@ python ./web.py
 #. ubuntu 12.04
 sudo su -
 apt-get install uwsgi uwsgi-plugin-python nginx 
-pip install bottle
+pip install bottle slimit
 cd /var/www/
 git clone https://github.com/marlboromoo/web_mcstatus.git
 cd web_mcstatus 
