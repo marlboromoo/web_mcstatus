@@ -2,6 +2,7 @@
 
 import base64
 import os
+import slimit
 
 CACHE_DIR='/tmp/web_mcstatus_js'
 
@@ -125,6 +126,7 @@ def make_js(scheme, netloc, host, port):
         js = __replace(js, '$NETLOC', str(netloc))
         js = __replace(js, '$HOST', str(host))
         js = __replace(js, '$PORT', str(port))
+        js = slimit.minify(js)
         make_cache(host, port, js)
     return js
 
