@@ -55,8 +55,8 @@ rm -rf /tmp/web_mcstatus_js/* #. clean JS cache files
 ### API
 ```
 curl http://127.0.1.1/ 
-curl http://127.0.1.1/status 
-curl http://127.0.1.1/rules #. full status
+curl http://127.0.1.1/status?host=localhost&port=25565
+curl http://127.0.1.1/rules?host=localhost&port=25565 #. full status
 ```
 
 ### WIDGET
