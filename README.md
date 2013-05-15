@@ -6,6 +6,7 @@ WEB API/Widget to query Minecraft status.
  - Python
  - [mcstatus] [1]
  - [Bottle] [2]
+ - [SlimIt] [7]
  - [uWSGI] [3] (option)
  - [nginx] [4] (option)
                                                                                 
@@ -42,6 +43,13 @@ ln -s /etc/nginx/sites-available/web_mcstatus /etc/nginx/sites-enabled/
 /etc/init.d/nginx restart
 ```
 
+## Upgrade
+```
+cd /var/www/web_mcstatus
+git pull
+rm -rf /tmp/web_mcstatus_js/* #. clean JS cache files
+```
+
 ## Usage
 
 ### API
@@ -71,4 +79,5 @@ Released under the [MIT License] [6].
   [4]: http://nginx.org/ "Nginx"
   [5]: https://github.com/marlboromoo/web_mcstatus/blob/master/doc/web_mcstatus.html "web_mcstatus.html"
   [6]: http://opensource.org/licenses/MIT "MIT License"
+  [7]: https://github.com/rspivak/slimit "SlimIt"
 
