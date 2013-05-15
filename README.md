@@ -63,7 +63,6 @@ curl http://127.0.1.1/rules #. full status
 see [web_mcstatus.html] [5].
 
 ## TODO
- - Query multiple hosts
  - Configuation system
  - ...
 
