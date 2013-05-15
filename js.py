@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+import base64
+import os
+
+CACHE_DIR='/tmp/web_mcstatus_js'
+
 TEMPLATE= """
 /****** reference:  http://alexmarandon.com/articles/web_widget_jquery/ ******/
 
@@ -72,12 +77,54 @@ def __replace(template, old, new):
     """docstring for replace"""
     return template.replace(old, new)
 
+def hash_name(host, port):
+    """docstring for hash_name"""
+    return base64.urlsafe_b64encode("%s:%s" % (host, port))
+
+def cache_path(host, port):
+    """docstring for cache_path"""
+    return os.path.join(CACHE_DIR, hash_name(host, port))
+
+def create_cache_dir():
+    """crate cache directory"""
+    try:
+        if not os.path.exists(CACHE_DIR):
+            os.mkdir(CACHE_DIR)
+    except Exception:
+        pass
+
+def make_cache(host, port, js):
+    """create cache file"""
+    create_cache_dir()
+    try:
+        with open(cache_path(host, port), 'w') as f:
+            f.writelines(js)
+    except Exception, e:
+        print e
+
+def get_cache(host, port):
+    """get cache file"""
+    try:
+        with open(cache_path(host, port), 'r') as f:
+            cache = f.readlines()
+    except Exception, e:
+        print e
+        cache = None
+    return cache
+
 def make_js(scheme, netloc, host, port):
-    """create java script file with customize attrs"""
-    js = TEMPLATE
-    js = __replace(js, '$SCHEMA', str(scheme))
-    js = __replace(js, '$NETLOC', str(netloc))
-    js = __replace(js, '$HOST', str(host))
-    js = __replace(js, '$PORT', str(port))
+    """
+    Get java script from cache file if present, 
+    otherwise generate java script with customize attrs and write to disk.
+
+    """
+    js = get_cache(host, port)
+    if not js:
+        js = TEMPLATE
+        js = __replace(js, '$SCHEMA', str(scheme))
+        js = __replace(js, '$NETLOC', str(netloc))
+        js = __replace(js, '$HOST', str(host))
+        js = __replace(js, '$PORT', str(port))
+        make_cache(host, port, js)
     return js
 
