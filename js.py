@@ -61,6 +61,7 @@ TEMPLATE= """
             /******* Load HTML *******/
             var jsonp_url = "$SCHEMA://$NETLOC/rules?host=$HOST&port=$PORT&callback=?";
             $.getJSON(jsonp_url, function(data) {
+                $('#web_mcstatus-notice').remove();
                 $('#web_mcstatus-container').html(
                     "Players: " + data.numplayers + "/" + data.maxplayers + "<br/>" +
                     "Gametype: " + data.gametype + "<br/>" + 
