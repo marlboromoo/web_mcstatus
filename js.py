@@ -63,10 +63,11 @@ TEMPLATE= """
             $.getJSON(jsonp_url, function(data) {
                 $('#$CNAME').empty();
                 $('#$CNAME').html(
+                    "Edition" + data.game_id + "<br/>" +
                     "Players: " + data.numplayers + "/" + data.maxplayers + "<br/>" +
-                    "Gametype: " + data.gametype + "<br/>" + 
-                    "Version: " + data.version + "<br/>" + 
-                    "Plugins: " + data.plugins + "<br/>" 
+                    "Gametype: " + data.gametype + "<br/>" +
+                    "Version: " + data.version + "<br/>" +
+                    "Plugins: " + data.plugins + "<br/>"
                     );
             });
         });
