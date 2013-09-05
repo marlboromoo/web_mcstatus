@@ -61,8 +61,8 @@ TEMPLATE= """
             /******* Load HTML *******/
             var jsonp_url = "$SCHEMA://$NETLOC/rules?host=$HOST&port=$PORT&callback=?";
             $.getJSON(jsonp_url, function(data) {
-                $('#web_mcstatus-container').empty();
-                $('#web_mcstatus-container').html(
+                $('#$CNAME').empty();
+                $('#$CNAME').html(
                     "Players: " + data.numplayers + "/" + data.maxplayers + "<br/>" +
                     "Gametype: " + data.gametype + "<br/>" + 
                     "Version: " + data.version + "<br/>" + 
@@ -114,7 +114,7 @@ def get_cache(host, port):
         cache = None
     return cache
 
-def make_js(scheme, netloc, host, port):
+def make_js(scheme, netloc, host, port, cname):
     """
     Get java script from cache file if present, 
     otherwise generate java script with customize attrs and write to disk.
@@ -127,6 +127,7 @@ def make_js(scheme, netloc, host, port):
         js = __replace(js, '$NETLOC', str(netloc))
         js = __replace(js, '$HOST', str(host))
         js = __replace(js, '$PORT', str(port))
+        js = __replace(js, '$CNAME', str(cname))
         js = slimit.minify(js, mangle=True, mangle_toplevel=True)
         make_cache(host, port, js)
     return js
