@@ -84,9 +84,9 @@ def hash_name(host, port):
     """docstring for hash_name"""
     return base64.urlsafe_b64encode("%s:%s" % (host, port))
 
-def cache_path(host, port):
+def cache_path(host, port, type_):
     """docstring for cache_path"""
-    return os.path.join(CACHE_DIR, hash_name(host, port))
+    return os.path.join(CACHE_DIR, hash_name(host, port, type_))
 
 def create_cache_dir():
     """crate cache directory"""
@@ -96,19 +96,19 @@ def create_cache_dir():
     except Exception:
         pass
 
-def make_cache(host, port, js):
+def make_cache(host, port, type_, js):
     """create cache file"""
     create_cache_dir()
     try:
-        with open(cache_path(host, port), 'w') as f:
+        with open(cache_path(host, port, type_), 'w') as f:
             f.writelines(js)
     except Exception, e:
         print e
 
-def get_cache(host, port):
+def get_cache(host, port, type_):
     """get cache file"""
     try:
-        with open(cache_path(host, port), 'r') as f:
+        with open(cache_path(host, port, type_), 'r') as f:
             cache = f.readlines()
     except Exception, e:
         print e
@@ -121,7 +121,7 @@ def make_js(scheme, netloc, host, port, cname, type_):
     otherwise generate java script with customize attrs and write to disk.
 
     """
-    js = get_cache(host, port)
+    js = get_cache(host, port, type_)
     if not js:
         js = TEMPLATE
         js = __replace(js, '$SCHEMA', str(scheme))
@@ -131,6 +131,6 @@ def make_js(scheme, netloc, host, port, cname, type_):
         js = __replace(js, '$CNAME', str(cname))
         js = __replace(js, '$TYPE', str(type_))
         js = slimit.minify(js, mangle=True, mangle_toplevel=True)
-        make_cache(host, port, js)
+        make_cache(host, port, type_, js)
     return js
 
