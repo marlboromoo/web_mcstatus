@@ -43,19 +43,19 @@ TEMPLATE= """
         // new jQuery in our local jQuery variable
         jQuery = window.jQuery.noConflict(true);
         // Call our main function
-        main(); 
+        main();
     }
 
     /******** Our main function ********/
-    function main() { 
-        jQuery(document).ready(function($) { 
+    function main() {
+        jQuery(document).ready(function($) {
             /******* Load CSS
-            var css_link = $("<link>", { 
-                rel: "stylesheet", 
-                type: "text/css", 
-                href: "style.css" 
+            var css_link = $("<link>", {
+                rel: "stylesheet",
+                type: "text/css",
+                href: "style.css"
             });
-            css_link.appendTo('head');          
+            css_link.appendTo('head');
             *******/
 
             /******* Load HTML *******/
@@ -117,7 +117,7 @@ def get_cache(host, port):
 
 def make_js(scheme, netloc, host, port, cname):
     """
-    Get java script from cache file if present, 
+    Get java script from cache file if present,
     otherwise generate java script with customize attrs and write to disk.
 
     """
