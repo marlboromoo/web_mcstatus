@@ -57,11 +57,11 @@ def return_js():
     netloc = request.urlparts.netloc
     host = q.get('host') if 'host' in q.keys() else MC_HOST
     port = q.get('port') if 'port' in q.keys() else MC_PORT
-    type = q.get('type') if 'type' in q.keys() else QUERY_TYPE
+    type_ = q.get('type') if 'type' in q.keys() else QUERY_TYPE
     cname = "%s-%s" % (CONTAINER, q.get('cname')) \
             if 'cname' in q.keys() else CONTAINER
     response.headers['Content-Type'] = 'text/javascript'
-    return js.make_js(scheme, netloc, host, port, cname, type)
+    return js.make_js(scheme, netloc, host, port, cname, type_)
 
 @get('/favicon.ico')
 def return_favicon():
