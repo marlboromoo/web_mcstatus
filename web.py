@@ -7,6 +7,7 @@ import js
 
 MC_HOST="localhost"
 MC_PORT=25565
+QUERY_TYPE='rules'
 BIND_HOST='127.0.1.1'
 BIND_PORT=80
 CONTAINER='web_mcstatus-container'
@@ -56,10 +57,11 @@ def return_js():
     netloc = request.urlparts.netloc
     host = q.get('host') if 'host' in q.keys() else MC_HOST
     port = q.get('port') if 'port' in q.keys() else MC_PORT
+    type = q.get('type') if 'type' in q.keys() else QUERY_TYPE
     cname = "%s-%s" % (CONTAINER, q.get('cname')) \
             if 'cname' in q.keys() else CONTAINER
     response.headers['Content-Type'] = 'text/javascript'
-    return js.make_js(scheme, netloc, host, port, cname)
+    return js.make_js(scheme, netloc, host, port, cname, type)
 
 @get('/favicon.ico')
 def return_favicon():
